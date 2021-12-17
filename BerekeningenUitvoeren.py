@@ -20,7 +20,7 @@ print("6 x 7 =", multiplication(6, 7))
 def division(number1, number2):
     return number1 / number2
 
-print("number : 12 =", int(division(144, 12)))
+print("144 : 12 =", int(division(144, 12)))
 
 # calculation 5
 def increment(number):
