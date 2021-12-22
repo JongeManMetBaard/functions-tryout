@@ -1,4 +1,4 @@
-print("“Welkom bij Papi Gelato je mag alle smaken kiezen zolang het maar vanille ijs is.”")
+print("“Welkom bij Papi Gelato”")
 # stap 1
 def smaak(scoopsOfIceCream):
     num = 1                
