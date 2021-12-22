@@ -1,29 +1,24 @@
 print("“Welkom bij Papi Gelato je mag alle smaken kiezen zolang het maar vanille ijs is.”")
 # stap 1
+def smaak(scoopsOfIceCream):
+    num = 1                
+    while num <= scoopsOfIceCream:
+        flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?” ")
+        if flavor != "A" and flavor != "C" and flavor != "M" and flavor != "V":
+            print("“Sorry dat snap ik niet...”")
+        if flavor == "A" or flavor == "C" or flavor == "M" or flavor == "V":
+            num +=1
 def askAmountOfIceCreamScoops():
     repeat = True 
     while repeat: 
         repeat = False
         scoopsOfIceCream = int(input("“Hoeveel bolletjes wilt u?” "))
         if scoopsOfIceCream <= 3 and scoopsOfIceCream >= 1:
-            num = 1                
-            while num <= scoopsOfIceCream:
-                flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?” ")
-                if flavor != "A" and flavor != "C" and flavor != "M" and flavor != "V":
-                    print("“Sorry dat snap ik niet...”")
-                if flavor == "A" or flavor == "C" or flavor == "M" or flavor == "V":
-                    num +=1
-            askInConeOrBowl(scoopsOfIceCream)
-            
+            smaak(scoopsOfIceCream)
+            askInConeOrBowl(scoopsOfIceCream)  
         elif scoopsOfIceCream <= 8 and scoopsOfIceCream >= 4:
             print("“Dan krijgt u van mij een bakje met " + str(scoopsOfIceCream) + " bolletjes”")
-            num = 1                
-            while num <= scoopsOfIceCream:
-                flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?” ")
-                if flavor != "A" and flavor != "C" and flavor != "M" and flavor != "V":
-                    print("“Sorry dat snap ik niet...”")
-                if flavor == "A" or flavor == "C" or flavor == "M" or flavor == "V":
-                    num +=1
+            smaak(scoopsOfIceCream)
             askOrderMore("bakje", scoopsOfIceCream)
         elif scoopsOfIceCream > 8:
             print("“Sorry, zulke grote bakken hebben we niet...”")
