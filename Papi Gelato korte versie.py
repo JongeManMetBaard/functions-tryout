@@ -1,6 +1,6 @@
 print("“Welkom bij Papi Gelato”")
 # stap 1
-def smaak(scoopsOfIceCream):
+def askFlavor(scoopsOfIceCream):
     num = 1                
     while num <= scoopsOfIceCream:
         flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?” ")
@@ -12,13 +12,14 @@ def askAmountOfIceCreamScoops():
     repeat = True 
     while repeat: 
         repeat = False
+        global scoopsOfIceCream
         scoopsOfIceCream = int(input("“Hoeveel bolletjes wilt u?” "))
         if scoopsOfIceCream <= 3 and scoopsOfIceCream >= 1:
-            smaak(scoopsOfIceCream)
-            askInConeOrBowl(scoopsOfIceCream)  
+            askFlavor(scoopsOfIceCream)
+            askInConeOrBowl(scoopsOfIceCream) 
         elif scoopsOfIceCream <= 8 and scoopsOfIceCream >= 4:
             print("“Dan krijgt u van mij een bakje met " + str(scoopsOfIceCream) + " bolletjes”")
-            smaak(scoopsOfIceCream)
+            askFlavor(scoopsOfIceCream)
             askOrderMore("bakje", scoopsOfIceCream)
         elif scoopsOfIceCream > 8:
             print("“Sorry, zulke grote bakken hebben we niet...”")
@@ -32,6 +33,7 @@ def askInConeOrBowl(scoopsOfIceCream):
     repeat = True
     while repeat:
         repeat = False
+        global coneOrBowl
         coneOrBowl = input("“Wilt u deze " + str(scoopsOfIceCream) + " bolletje(s) in een hoorntje of een bakje? (hoorntje/bakje)”")
         if coneOrBowl == "hoorntje" or coneOrBowl == "bakje":
             askOrderMore(coneOrBowl, scoopsOfIceCream)
@@ -49,9 +51,32 @@ def askOrderMore(coneOrBowl, scoopsOfIceCream):
         if orderMore == "Y":
             askAmountOfIceCreamScoops()
         elif orderMore == "N":
-            print("“Bedankt en tot ziens!”")                        
+            print("“Bedankt en tot ziens!”")
+            return scoopsOfIceCream                        
         else:
             print("“Sorry dat snap ik niet...”")
             repeat = True
 
 askAmountOfIceCreamScoops()
+
+# bonnetje
+scoops = 1.10
+cones = 1.25
+bowls = 0.75
+
+def calc():
+    priceScoops = scoopsOfIceCream * scoops       
+    print('---------["Papi Gelato"]---------')
+    print("")
+    print("Bolletjes    " ,scoopsOfIceCream, " x  €1.10 = €"+ f'{priceScoops:4.2f}')
+    if coneOrBowl == "hoorntje":
+        priceTotalCones = priceScoops + cones
+        print("Hoorntje      1  x  €1.25 = €"+ str(cones))
+        print("                         --------")
+        print("Totaal                   = €"+ f'{priceTotalCones:4.2f}') 
+    else:
+        priceTotalBowls = priceScoops + bowls
+        print("Bakje         1  x  €0.75 = €"+ str(bowls))
+        print("                          --------")
+        print("Totaal                    = €"+ f'{priceTotalBowls:4.2f}')
+calc()
