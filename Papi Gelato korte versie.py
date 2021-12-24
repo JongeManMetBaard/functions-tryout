@@ -77,6 +77,6 @@ def calc():
     else:
         priceTotalBowls = priceScoops + bowls
         print("Bakje         1  x  €0.75 = €"+ str(bowls))
-        print("                          --------")
+        print("                          -------- +")
         print("Totaal                    = €"+ f'{priceTotalBowls:4.2f}')
 calc()
