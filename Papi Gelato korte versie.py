@@ -170,7 +170,7 @@ priceFlavorPerLiter = 9.80
 
 def calcBusiness():
     totalPriceFlavorPerLiter = amountOfLiter * priceFlavorPerLiter
-    calcBTW = totalPriceFlavorPerLiter * 9 / 109 
+    calcBTW = totalPriceFlavorPerLiter * 6 / 106 
 
     print('---------["Papi Gelato"]---------')
     print("")
