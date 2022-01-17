@@ -2,7 +2,13 @@ print("“Welkom bij Papi Gelato”")
 counterCones = 0
 counterBowls = 0
 totalScoopsOfIceCream = 0
-coneOrBowl = "bakje" 
+coneOrBowl = "bakje"
+
+counterWhippedCream = 0
+counterTopping = 0
+totalScoopsOfIceCreamSprinkels = 0
+counterCaramelSauceCone = 0
+counterCaramelSauceBowl = 0
 
 # smaken
 def askFlavor(scoopsOfIceCream):
@@ -60,13 +66,46 @@ def askInConeOrBowl(scoopsOfIceCream):
                 global counterBowls
                 counterBowls += 1
 
-            askOrderMore(coneOrBowl, scoopsOfIceCream)
+            askTopping(coneOrBowl, scoopsOfIceCream)
 
         else:
             print("“Sorry, dat snap ik niet...”")
             repeat = True
 
     return coneOrBowl
+
+# toppings
+def askTopping(coneOrBowl, scoopsOfIceCream):
+
+    repeat = True 
+    while repeat:
+        repeat = False
+        global topping
+        topping = input("“Wat voor topping wilt u: A) Geen, B) Slagroom, C) Sprinkels of D) Caramel Saus?”")
+
+        if topping == "A" or topping == "B" or topping == "B" or topping == "C" or topping == "D":
+            if topping == "A" or topping == "B" or topping == "C" or topping == "D":
+                global counterTopping
+                counterTopping += 1
+                if topping == "B":
+                    global counterWhippedCream
+                    counterWhippedCream += 1
+                if topping == "D":
+                    if coneOrBowl == "hoorntje":
+                        global counterCaramelSauceCone
+                        counterCaramelSauceCone += 1
+                    if coneOrBowl == "bakje":
+                        global counterCaramelSauceBowl
+                        counterCaramelSauceBowl += 1
+                if topping == "A":
+                    counterTopping = 0
+
+            
+            askOrderMore(coneOrBowl, scoopsOfIceCream)
+        
+        else: 
+            print("“Sorry, dat snap ik niet...”")
+            repeat = True
 
 # stap 3
 def askOrderMore(coneOrBowl, scoopsOfIceCream):
@@ -78,10 +117,16 @@ def askOrderMore(coneOrBowl, scoopsOfIceCream):
 
         if orderMore == "Y":        
             totalScoopsOfIceCream += scoopsOfIceCream
+            if topping == "C":
+                global totalScoopsOfIceCreamSprinkels
+                totalScoopsOfIceCreamSprinkels += scoopsOfIceCream
+
             askAmountOfIceCreamScoops()
 
         elif orderMore == "N": 
             totalScoopsOfIceCream += scoopsOfIceCream
+            if topping == "C":
+                totalScoopsOfIceCreamSprinkels += scoopsOfIceCream
             print("“Bedankt en tot ziens!”")    
 
         else:
@@ -96,13 +141,21 @@ scoops = 1.10
 cones = 1.25
 bowls = 0.75
 
+whippedCream = 0.50
+sprinkels = 0.30
+caramelSauceCone = 0.60
+caramelSauceBowl = 0.90 
 
 def calc():
     priceCones = counterCones * cones 
     priceBowls = counterBowls * bowls
     priceScoops = totalScoopsOfIceCream * scoops
-    global totalPriceAll 
-    totalPriceAll = priceScoops + priceBowls + priceCones
+    priceSprinkels = sprinkels * totalScoopsOfIceCreamSprinkels
+    priceCaramelSauceCone = caramelSauceCone * counterCaramelSauceCone
+    priceCaramelSauceBowl = caramelSauceBowl * counterCaramelSauceBowl
+    priceWhippedCream = counterWhippedCream * whippedCream 
+    priceTopping = priceWhippedCream + priceCaramelSauceCone + priceCaramelSauceBowl + priceSprinkels
+    totalPriceAll = priceScoops + priceBowls + priceCones + priceTopping
     
     print('---------["Papi Gelato"]---------')
     print("")
@@ -112,7 +165,9 @@ def calc():
         print("Hoorntje     ",counterCones," x  €1.25 = €"+ f'{priceCones:4.2f}')
     if counterBowls > 0:
         print("Bakje        ",counterBowls," x  €0.75 = €"+ f'{priceBowls:4.2f}')
+    if counterTopping > 1:
+        print("Topping       1  x  €"f"{priceTopping:4.2f} = €"+ f'{priceTopping:4.2f}')
     print("                         --------")
-    print("Totaal                   = €"+ f'{totalPriceAll:4.2f}') 
+    print("Totaal                    = €"+ f'{totalPriceAll:4.2f}') 
     
 calc()
