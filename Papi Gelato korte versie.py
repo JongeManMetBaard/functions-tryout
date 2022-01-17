@@ -14,12 +14,12 @@ counterCaramelSauceBowl = 0
 def askFlavor(scoopsOfIceCream):
     num = 1                
     while num <= scoopsOfIceCream:
-        flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?”")
+        flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade of V) Vanille?”")
 
-        if flavor != "A" and flavor != "C" and flavor != "M" and flavor != "V":
-            print("“Sorry dat snap ik niet...”")
+        if flavor != "A" and flavor != "C" and flavor != "V":
+            print("“Sorry dat is geen optie die we aanbieden...”")
             
-        if flavor == "A" or flavor == "C" or flavor == "M" or flavor == "V":
+        if flavor == "A" or flavor == "C" or flavor == "V":
             num +=1 
 
 #(--------------------------------------Smaken per liter---------------------------------------------)
@@ -27,10 +27,10 @@ def icePerLiter(amountOfLiter):
     num = 0
     for x in range (amountOfLiter):
         num += 1
-        flavorPerLiter = input("Welke smaak wilt u voor {} literijs, A) Aardbei, C) Chocolade, M) Munt of V) Vanille?”".format(num))
+        flavorPerLiter = input("Welke smaak wilt u voor {} literijs, A) Aardbei, C) Chocolade of V) Vanille?”".format(num))
 
-        if flavorPerLiter != "A" and flavorPerLiter != "C" and flavorPerLiter != "M" and flavorPerLiter != "V":
-            print("“Sorry dat snap ik niet...”")
+        if flavorPerLiter != "A" and flavorPerLiter != "C" and flavorPerLiter != "V":
+            print("“Sorry dat is geen optie die we aanbieden...”")
 
 #(--------------------------------------Zakelijk/particulier-----------------------------------------)
 def askPersonalOrBusiness():
@@ -49,7 +49,7 @@ def askPersonalOrBusiness():
             calcBusiness()
 
         else:
-            print("“Sorry, dat snap ik niet...”")
+            print("“Sorry dat is geen optie die we aanbieden...”")
             repeat = True
 
 #(------------------------------------------Stap 1---------------------------------------------------)
@@ -75,7 +75,7 @@ def askAmountOfIceCreamScoops():
             repeat = True   
 
         else:
-            print("“Sorry dat snap ik niet...”")
+            print("“Sorry dat is geen optie die we aanbieden...”")
             repeat = True
 
 #(------------------------------------------Stap 2---------------------------------------------------)
@@ -99,7 +99,7 @@ def askInConeOrBowl(scoopsOfIceCream):
             askTopping(coneOrBowl, scoopsOfIceCream)
 
         else:
-            print("“Sorry, dat snap ik niet...”")
+            print("“Sorry dat is geen optie die we aanbieden...”")
             repeat = True
 
     return coneOrBowl
@@ -113,7 +113,7 @@ def askTopping(coneOrBowl, scoopsOfIceCream):
         global topping
         topping = input("“Wat voor topping wilt u: A) Geen, B) Slagroom, C) Sprinkels of D) Caramel Saus?”")
 
-        if topping == "A" or topping == "B" or topping == "B" or topping == "C" or topping == "D":
+        if topping == "A" or topping == "B" or topping == "C" or topping == "D":
             if topping == "A" or topping == "B" or topping == "C" or topping == "D":
                 global counterTopping
                 counterTopping += 1
@@ -134,7 +134,7 @@ def askTopping(coneOrBowl, scoopsOfIceCream):
             askOrderMore(coneOrBowl, scoopsOfIceCream)
         
         else: 
-            print("“Sorry, dat snap ik niet...”")
+            print("“Sorry dat is geen optie die we aanbieden...”")
             repeat = True
 
 #(------------------------------------------Stap 3---------------------------------------------------)
@@ -160,7 +160,7 @@ def askOrderMore(coneOrBowl, scoopsOfIceCream):
             print("“Bedankt en tot ziens!”")    
 
         else:
-            print("“Sorry dat snap ik niet...”")
+            print("“Sorry dat is geen optie die we aanbieden...”")
             repeat = True
 #(--------------------------------------Functions above----------------------------------------------)
 
@@ -184,7 +184,7 @@ askPersonalOrBusiness()
 
 #(--------------------------------------Particulier bonnetje-----------------------------------------)
 if personal_business == 1:
-    scoops = 1.10
+    scoops = 0.95
     cones = 1.25
     bowls = 0.75
 
@@ -206,13 +206,13 @@ if personal_business == 1:
         
         print('---------["Papi Gelato"]---------')
         print("")
-        print("Bolletjes    " ,totalScoopsOfIceCream, " x  €1.10 = €"+ f'{priceScoops:4.2f}')
+        print("Bolletjes    " ,totalScoopsOfIceCream, " x  €0.95 = €"+ f'{priceScoops:4.2f}')
 
         if counterCones > 0: 
             print("Hoorntje     ",counterCones," x  €1.25 = €"+ f'{priceCones:4.2f}')
         if counterBowls > 0:
             print("Bakje        ",counterBowls," x  €0.75 = €"+ f'{priceBowls:4.2f}')
-        if counterTopping > 1:
+        if counterTopping > 0:
             print("Topping       1  x  €"f"{priceTopping:4.2f} = €"+ f'{priceTopping:4.2f}')
         print("                         --------")
         print("Totaal                    = €"+ f'{totalPriceAll:4.2f}') 
