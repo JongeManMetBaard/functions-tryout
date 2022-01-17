@@ -10,11 +10,11 @@ totalScoopsOfIceCreamSprinkels = 0
 counterCaramelSauceCone = 0
 counterCaramelSauceBowl = 0
 
-# smaken
+#(--------------------------------------Smaken-------------------------------------------------------)
 def askFlavor(scoopsOfIceCream):
     num = 1                
     while num <= scoopsOfIceCream:
-        flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?” ")
+        flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?”")
 
         if flavor != "A" and flavor != "C" and flavor != "M" and flavor != "V":
             print("“Sorry dat snap ik niet...”")
@@ -22,7 +22,37 @@ def askFlavor(scoopsOfIceCream):
         if flavor == "A" or flavor == "C" or flavor == "M" or flavor == "V":
             num +=1 
 
-# stap 1
+#(--------------------------------------Smaken per liter---------------------------------------------)
+def icePerLiter(amountOfLiter):
+    num = 0
+    for x in range (amountOfLiter):
+        num += 1
+        flavorPerLiter = input("Welke smaak wilt u voor {} literijs, A) Aardbei, C) Chocolade, M) Munt of V) Vanille?”".format(num))
+
+        if flavorPerLiter != "A" and flavorPerLiter != "C" and flavorPerLiter != "M" and flavorPerLiter != "V":
+            print("“Sorry dat snap ik niet...”")
+
+#(--------------------------------------Zakelijk/particulier-----------------------------------------)
+def askPersonalOrBusiness():
+    repeat = True 
+    while repeat: 
+        repeat = False
+        global personal_business
+        personal_business = int(input("“Bent u 1) particulier of 2) zakelijk?”"))
+        if personal_business == 1:
+            askAmountOfIceCreamScoops()
+
+        elif personal_business == 2:
+            global amountOfLiter
+            amountOfLiter = int(input("“Hoeveel liter ijs wilt u?”"))
+            icePerLiter(amountOfLiter)
+            calcBusiness()
+
+        else:
+            print("“Sorry, dat snap ik niet...”")
+            repeat = True
+
+#(------------------------------------------Stap 1---------------------------------------------------)
 def askAmountOfIceCreamScoops():
     repeat = True 
     while repeat: 
@@ -48,7 +78,7 @@ def askAmountOfIceCreamScoops():
             print("“Sorry dat snap ik niet...”")
             repeat = True
 
-# stap 2
+#(------------------------------------------Stap 2---------------------------------------------------)
 def askInConeOrBowl(scoopsOfIceCream):
     
     repeat = True
@@ -74,7 +104,7 @@ def askInConeOrBowl(scoopsOfIceCream):
 
     return coneOrBowl
 
-# toppings
+#(-----------------------------------------Toppings--------------------------------------------------)
 def askTopping(coneOrBowl, scoopsOfIceCream):
 
     repeat = True 
@@ -107,7 +137,7 @@ def askTopping(coneOrBowl, scoopsOfIceCream):
             print("“Sorry, dat snap ik niet...”")
             repeat = True
 
-# stap 3
+#(------------------------------------------Stap 3---------------------------------------------------)
 def askOrderMore(coneOrBowl, scoopsOfIceCream):
     global totalScoopsOfIceCream
     repeat = True
@@ -132,42 +162,59 @@ def askOrderMore(coneOrBowl, scoopsOfIceCream):
         else:
             print("“Sorry dat snap ik niet...”")
             repeat = True
+#(--------------------------------------Functions above----------------------------------------------)
 
-askAmountOfIceCreamScoops()
 
-#(--------------------------------------functions above----------------------------------------------------)
-# bonnetje
-scoops = 1.10
-cones = 1.25
-bowls = 0.75
+#(--------------------------------------Zakelijk bonnetje--------------------------------------------)
+priceFlavorPerLiter = 9.80
 
-whippedCream = 0.50
-sprinkels = 0.30
-caramelSauceCone = 0.60
-caramelSauceBowl = 0.90 
+def calcBusiness():
+    totalPriceFlavorPerLiter = amountOfLiter * priceFlavorPerLiter
+    calcBTW = totalPriceFlavorPerLiter * 9 / 109 
 
-def calc():
-    priceCones = counterCones * cones 
-    priceBowls = counterBowls * bowls
-    priceScoops = totalScoopsOfIceCream * scoops
-    priceSprinkels = sprinkels * totalScoopsOfIceCreamSprinkels
-    priceCaramelSauceCone = caramelSauceCone * counterCaramelSauceCone
-    priceCaramelSauceBowl = caramelSauceBowl * counterCaramelSauceBowl
-    priceWhippedCream = counterWhippedCream * whippedCream 
-    priceTopping = priceWhippedCream + priceCaramelSauceCone + priceCaramelSauceBowl + priceSprinkels
-    totalPriceAll = priceScoops + priceBowls + priceCones + priceTopping
-    
     print('---------["Papi Gelato"]---------')
     print("")
-    print("Bolletjes    " ,totalScoopsOfIceCream, " x  €1.10 = €"+ f'{priceScoops:4.2f}')
+    print("Liter         {} x €{:.2f}  = €{:.2f}".format(amountOfLiter, priceFlavorPerLiter, totalPriceFlavorPerLiter))
+    print("                       -------")
+    print("Totaal                   = €{:.2f}".format(totalPriceFlavorPerLiter))
+    print("BTW (9%)                 = €{:.2f}".format(calcBTW))
 
-    if counterCones > 0: 
-        print("Hoorntje     ",counterCones," x  €1.25 = €"+ f'{priceCones:4.2f}')
-    if counterBowls > 0:
-        print("Bakje        ",counterBowls," x  €0.75 = €"+ f'{priceBowls:4.2f}')
-    if counterTopping > 1:
-        print("Topping       1  x  €"f"{priceTopping:4.2f} = €"+ f'{priceTopping:4.2f}')
-    print("                         --------")
-    print("Totaal                    = €"+ f'{totalPriceAll:4.2f}') 
+askPersonalOrBusiness()
+
+
+#(--------------------------------------Particulier bonnetje-----------------------------------------)
+if personal_business == 1:
+    scoops = 1.10
+    cones = 1.25
+    bowls = 0.75
+
+    whippedCream = 0.50
+    sprinkels = 0.30
+    caramelSauceCone = 0.60
+    caramelSauceBowl = 0.90 
+
+    def calcPersonal():
+        priceCones = counterCones * cones 
+        priceBowls = counterBowls * bowls
+        priceScoops = totalScoopsOfIceCream * scoops
+        priceSprinkels = sprinkels * totalScoopsOfIceCreamSprinkels
+        priceCaramelSauceCone = caramelSauceCone * counterCaramelSauceCone
+        priceCaramelSauceBowl = caramelSauceBowl * counterCaramelSauceBowl
+        priceWhippedCream = counterWhippedCream * whippedCream 
+        priceTopping = priceWhippedCream + priceCaramelSauceCone + priceCaramelSauceBowl + priceSprinkels
+        totalPriceAll = priceScoops + priceBowls + priceCones + priceTopping
+        
+        print('---------["Papi Gelato"]---------')
+        print("")
+        print("Bolletjes    " ,totalScoopsOfIceCream, " x  €1.10 = €"+ f'{priceScoops:4.2f}')
+
+        if counterCones > 0: 
+            print("Hoorntje     ",counterCones," x  €1.25 = €"+ f'{priceCones:4.2f}')
+        if counterBowls > 0:
+            print("Bakje        ",counterBowls," x  €0.75 = €"+ f'{priceBowls:4.2f}')
+        if counterTopping > 1:
+            print("Topping       1  x  €"f"{priceTopping:4.2f} = €"+ f'{priceTopping:4.2f}')
+        print("                         --------")
+        print("Totaal                    = €"+ f'{totalPriceAll:4.2f}') 
     
-calc()
+    calcPersonal()
