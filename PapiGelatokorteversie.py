@@ -18,7 +18,7 @@ def sorry():
 def askFlavor(scoopsOfIceCream):
     num = 1                
     while num <= scoopsOfIceCream:
-        flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade of V) Vanille?”")
+        flavor = input("“Welke smaak wilt u voor bolletje nummer " + str(num) + "? A) Aardbei, C) Chocolade of V) Vanille?”").upper()
 
         if flavor != "A" and flavor != "C" and flavor != "V":
             sorry()
@@ -30,7 +30,7 @@ def askFlavor(scoopsOfIceCream):
 def icePerLiter(amountOfLiter):
     numLiter = 1
     while numLiter <= amountOfLiter:
-        flavorPerLiter = input("Welke smaak wilt u voor {} literijs, A) Aardbei, C) Chocolade of V) Vanille?”".format(numLiter))
+        flavorPerLiter = input("Welke smaak wilt u voor {} literijs, A) Aardbei, C) Chocolade of V) Vanille?”".format(numLiter)).upper()
 
         if flavorPerLiter != "A" and flavorPerLiter != "C" and flavorPerLiter != "V":
             sorry()
@@ -74,6 +74,7 @@ def askAmountOfIceCreamScoops():
             askFlavor(scoopsOfIceCream)
             global counterBowls
             counterBowls += 1
+            askTopping(coneOrBowl, scoopsOfIceCream)
             askOrderMore("bakje", scoopsOfIceCream)
 
         elif scoopsOfIceCream > 8:
@@ -101,8 +102,7 @@ def askInConeOrBowl(scoopsOfIceCream):
             if coneOrBowl == "bakje": 
                 global counterBowls
                 counterBowls += 1
-
-            askTopping(coneOrBowl, scoopsOfIceCream)
+                askTopping(coneOrBowl, scoopsOfIceCream)
 
         else:
             sorry()
@@ -117,7 +117,7 @@ def askTopping(coneOrBowl, scoopsOfIceCream):
     while repeat:
         repeat = False
         global topping
-        topping = input("“Wat voor topping wilt u: A) Geen, B) Slagroom, C) Sprinkels of D) Caramel Saus?”")
+        topping = input("“Wat voor topping wilt u: A) Geen, B) Slagroom, C) Sprinkels of D) Caramel Saus?”").upper()
 
         if topping == "A" or topping == "B" or topping == "C" or topping == "D":
             if topping == "A" or topping == "B" or topping == "C" or topping == "D":
@@ -136,8 +136,8 @@ def askTopping(coneOrBowl, scoopsOfIceCream):
                 if topping == "A":
                     counterTopping = 0
 
-            
-            askOrderMore(coneOrBowl, scoopsOfIceCream)
+            if scoopsOfIceCream <= 3 and scoopsOfIceCream >= 1:
+                askOrderMore(coneOrBowl, scoopsOfIceCream)
         
         else: 
             sorry()
@@ -149,7 +149,7 @@ def askOrderMore(coneOrBowl, scoopsOfIceCream):
     repeat = True
     while repeat:
         repeat = False
-        orderMore = input("“Hier is uw " + coneOrBowl + " met " + str(scoopsOfIceCream) + " bolletje(s). Wilt u nog meer bestellen? (Y/N)”")
+        orderMore = input("“Hier is uw " + coneOrBowl + " met " + str(scoopsOfIceCream) + " bolletje(s). Wilt u nog meer bestellen? (Y/N)”").upper()
 
         if orderMore == "Y":        
             totalScoopsOfIceCream += scoopsOfIceCream
